@@ -9,9 +9,13 @@
   "private": null,
   "devDependencies": {
     "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1"
+    "chai-as-promised": "^7.1.1",
+    "moment": "^2.22.2"
   },
   "scripts": {
     "start": "truffle compile && cp -r build/contracts ../api/api"
+  },
+  "dependencies": {
+    "openzeppelin-solidity": "^2.0.0"
   }
 }

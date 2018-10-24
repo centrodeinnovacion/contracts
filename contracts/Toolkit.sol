@@ -1,33 +1,19 @@
 pragma solidity ^0.4.23;
 
-contract Toolkit {
-    address public owner;
-    Hash[] public hashes;
+import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
 
-    struct Hash {
-        bytes32 part1;
-        bytes32 part2;
-    }
+contract Toolkit is Ownable {
+  mapping(bytes32 => mapping(bytes32 => string)) hashes;
 
-    constructor () public {
-        owner = msg.sender;
-    }
+  function add(bytes32 _part1, bytes32 _part2, string _name) public onlyOwner {
+    hashes[_part1][_part2] = _name;
+  }
 
-    modifier onlyOwner() {
-        require(owner == msg.sender);
-        _;
-    }
+  function validate(bytes32 _part1, bytes32 _part2) public view onlyOwner returns (string result)  {
+    result = hashes[_part1][_part2];
+  }
 
-    function add(bytes32 _part1, bytes32 _part2) public onlyOwner {
-        hashes.push(Hash({part1 : _part1, part2 : _part2}));
-    }
-
-    function validate(bytes32 _part1, bytes32 _part2) public view onlyOwner returns (bool)  {
-        for (uint i = 0; i < hashes.length; i++) {
-            Hash memory saved = hashes[i];
-            if (saved.part1 == _part1 && saved.part2 == _part2)
-                return true;
-        }
-        return false;
-    }
+  function kill() public onlyOwner {
+    selfdestruct(owner());
+  }
 }
