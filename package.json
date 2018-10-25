@@ -1,0 +1,23 @@
+{
+  "name": "contracts",
+  "version": "1.0.0",
+  "description": "Toolkit contracts",
+  "main": "index.js",
+  "repository": "keybase://team/toolkitbc/contracts",
+  "author": "Mesi Rendon <amrendonsa@unal.edu.co>",
+  "license": "MIT",
+  "private": null,
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "moment": "^2.22.2"
+  },
+  "scripts": {
+    "start": "truffle compile && cp -r build/contracts ../api/api"
+  },
+  "dependencies": {
+    "dotenv": "^6.1.0",
+    "openzeppelin-solidity": "^2.0.0",
+    "truffle-hdwallet-provider": "^0.0.6"
+  }
+}
